@@ -25,10 +25,12 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        $request->validate([
+            'email' => 'required|string',
+        ]);
         $request->authenticate();
 
         $request->session()->regenerate();
-
         if (Auth::user()->role == 'alumni') {
             return redirect()->route('alumni.dashboard')->with('success', 'Selamat Datang!');
         } elseif (Auth::user()->role == 'admin') {

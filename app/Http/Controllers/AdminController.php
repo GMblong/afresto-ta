@@ -6,8 +6,11 @@ use App\Models\Admin;
 use App\Models\Alumni;
 use App\Models\Jobs;
 use App\Models\Pengumuman;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\ExcelImport;
@@ -375,8 +378,29 @@ class AdminController extends Controller
         $request->validate([
             'excel_file' => 'required|mimes:xls,xlsx',
         ]);
-
-        Excel::import(new ExcelImport, $file);
+        $data = Excel::toArray(new ExcelImport, $file);
+        foreach ($data as $x => $row) {
+//            dd($x);
+            if ($row[$x] != null) {
+                Alumni::create([
+                    'nama'          => $row[$x][1],
+                    'nis'           => $row[$x][2],
+                    'telp'          => $row[$x][3],
+                    'tgl_lahir'     => Carbon::parse($row[$x][4]),
+                    'kelamin'       => $row[$x][5],
+                    'jurusan'       => $row[$x][6],
+                    'thn_lulus'     => $row[$x][7],
+                    'keterserapan'  => $row[$x][8],
+                    'alamat'        => $row[$x][9],
+                ]);
+                User::create([
+                    'name' => $row[$x][2],
+                    'email' => $row[$x][2],
+                    'role' => 'alumni',
+                    'password' => Hash::make($row[$x][2]),
+                ]);
+            }
+        }
 
         return redirect()->route('admin.alumni_list');
     }

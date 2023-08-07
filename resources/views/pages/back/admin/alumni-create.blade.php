@@ -113,7 +113,7 @@
                         <h4>Upload Data By Excel</h4>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/upload-data-alumni" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="excel_file" id="excel_file">
                             <button type="submit" class="btn btn-primary btn-md" style="float:right">
