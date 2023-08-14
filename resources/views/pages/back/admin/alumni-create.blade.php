@@ -89,13 +89,13 @@
                                 <div class="col-sm-10">
                                     <textarea class="form-control" name="alamat" id="alamat" rows="3" placeholder="Alamat" required></textarea>
                                 </div>
-                            </div>
+                            <!-- </div>
                             <div class="row mb-3">
                                 <label for="password" class="col-sm-2 col-form-label">Password</label>
                                 <div class="col-sm-10">
                                     <input type="password" class="form-control" name="password" id="password">
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="btn-save">
                                 <button type="submit" class="btn btn-primary btn-md" style="float:right">
                                     <span>Save</span>
@@ -113,7 +113,7 @@
                         <h4>Upload Data By Excel</h4>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST" enctype="multipart/form-data">
+                        <form action="/admin/upload-data-alumni" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="file" name="excel_file" id="excel_file">
                             <button type="submit" class="btn btn-primary btn-md" style="float:right">

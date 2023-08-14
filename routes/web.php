@@ -61,9 +61,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->controller(AdminControlle
     Route::put('/pengumuman/update/{id}', 'pengumumanUpdate')->name('admin.pengumuman_update');
     Route::post('/buat-pengumuman', 'pengumumanCreate')->name('admin.pengumuman_create');
     Route::get('/input-loker', 'jobCreate')->name('admin.job_create');
+    Route::get('/lowongan-pekerjaan/edit/{id}', 'jobEdit')->name('admin.job_edit');
+    Route::post('/lowongan-pekerjaan/update/{id}', 'jobUpdate')->name('admin.job_update');
+    Route::get('/lowongan-pekerjaan/delete/{id}', 'jobDelete')->name('admin.job_delete');
     Route::post('/loker-store', 'jobAdd')->name('admin.job_add');
     Route::get('/daftar-loker', 'lokerList')->name('admin.job_list');
     Route::get('/daftar-apply-kerja-alumni', 'alumniApply')->name('admin.alumni_apply');
+    Route::put('/daftar-apply-kerja-alumni/update/{id}', 'verifJobs')->name('admin.verif_jobs');
     Route::post('/upload-data-alumni', 'uploadExcel')->name('admin.upload_excel');
 });
 
@@ -78,6 +82,9 @@ Route::middleware(['auth', 'alumni'])->prefix('alumni')->controller(AlumniContro
     Route::get('/account', 'account')->name('alumni.account');
     Route::post('/store', 'store')->name('alumni.store');
     Route::get('/delete/{id}', 'delete')->name('alumni.delete');
+    Route::put('/update/{id}', 'editAlumni')->name('alumni.editAlumni');
+    Route::post('/apply-jobs', 'applyJobs')->name('alumni.apply');
+    Route::get('/cancel-apply/{id}', 'cancelApply')->name('alumni.cancel_apply');
 });
 
 // Pengumuman Route

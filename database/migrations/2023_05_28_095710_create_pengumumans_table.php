@@ -16,7 +16,7 @@ return new class extends Migration
             $table->date('tanggal')->format('d M Y');
             $table->string('judul');
             $table->string('deskripsi');
-            $table->string('image');
+            $table->string('image')->nullable()->change();
             $table->timestamps();
         });
     }

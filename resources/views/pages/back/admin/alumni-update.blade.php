@@ -42,7 +42,7 @@
                             <div class="row mb-3">
                                 <label for="tgl_lahir" class="col-sm-2 col-form-label">Tanggal Lahir</label>
                                 <div class="col-sm-10">
-                                    <input type="date" class="form-control" name="tgl_lahir" id="tgl_lahir"
+                                    <input type="text" class="form-control" name="tgl_lahir" id="tgl_lahir"
                                         value="{{ $alumni->tgl_lahir }}" required>
                                 </div>
                             </div>

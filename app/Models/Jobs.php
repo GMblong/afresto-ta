@@ -12,4 +12,11 @@ class Jobs extends Model
     protected $fillable = [
         'judul', 'nama_perusahaan', 'lokasi_perusahaan', 'deskripsi'
     ];
+
+        public function hasApplied($nis)
+    {
+        return ApplyJobs::where('nis', $nis)
+                        ->where('job_id', $this->id)
+                        ->exists();
+    }
 }

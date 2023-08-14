@@ -34,7 +34,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="image" class="form-label">Gambar</label>
-                                <input type="file" class="form-control" name="image" id="image" required>
+                                <input type="file" class="form-control" name="image" id="image" accept="image/*">
                             </div>
                             <div class="btn-submit">
                                 <button type="submit" class="btn btn-dark btn-md float-end">

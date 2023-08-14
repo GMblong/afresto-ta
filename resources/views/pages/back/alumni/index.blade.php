@@ -101,117 +101,28 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="row mt-1">
-            <div class="col-12 col-md-12 col-lg-12">
-                <div class="card shadow border-0">
-                    <div class="card-title border-bottom border-2 border-primary">
-                        <h4 class="px-3 py-3 px-lg-4 py-lg-4 mb-0">Daftar Lowongan Kerja</h4>
-                    </div>
-                    <div class="card-body table-responsive">
-                        <table id="example" class="table table-striped" style="width:100%">
-                        <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Judul Pekerjaan</th>
-                                    <th>Nama Perusahaan</th>
-                                    <th>Lokasi Perusahaan</th>
-                                    <th>Deskripsi</th>
-                                    <th>Gambar</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            @php
-                                    $number = 1;
-                                @endphp
-                                @foreach ($jobs as $row)
-                                    <tr class="align-middle">
-                                        <td>{{ $number }}</td>
-                                        <td>{{ $row->judul }}</td>
-                                        <td>{{ $row->nama_perusahaan }}</td>
-                                        <td>{{ $row->lokasi_perusahaan }}</td>
-                                        <td>{{ $row->deskripsi }}</td>
-                                        <td>
-                                            <a href="{{ asset('storage/images/' . $row->image) }}">
-                                                <img src="{{ asset('storage/images/' . $row->image) }}" width="50"
-                                                alt="">
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#{{ $row->id }}">Detail</a>
-                                            <a href="#" class="btn btn-dark btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#{{ $row->id }}">Apply</a>
-                                        </td>
-                                    </tr>
-                                    @php
-                                        $number++;
-                                    @endphp
-                                    <!-- Jobs Modal Start -->
-                                    <div class="modal fade" id="{{ $row->id }}" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h4 class="modal-title" id="exampleModalLabel">Detail Lowongan Pekerjaan
-                                                    </h4>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body d-block">
-                                                    <div class="mb-2">
-                                                        <h5>Judul Pekerjaan</h5>
-                                                        <span class="fs-4">{{ $row->judul }}</span>
-                                                        <div class="border-bottom mt-2"></div>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <h5>Nama Perusahaan</h5>
-                                                        <span class="fs-4">{{ $row->nama_perusahaan }}</span>
-                                                        <div class="border-bottom mt-2"></div>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <h5>Lokasi Perusahaan</h5>
-                                                        <span class="fs-4">{{ $row->lokasi_perusahaan }}</span>
-                                                        <div class="border-bottom mt-2"></div>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <h5>Deskripsi</h5>
-                                                        <span class="fs-4">{{ $row->deskripsi }}</span>
-                                                        <div class="border-bottom mt-2"></div>
-                                                    </div>
-                                                    <div class="mb-2">
-                                                        <h5>Gambar</h5>
-                                                        <span class="fs-4">{{ $row->image }}</span>
-                                                        <div class="border-bottom mt-2"></div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-dark"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        {{-- Jobs Modal End --}}
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         var options = {
             series: [{{ $percent1 }}, {{ $percent2 }}, {{ $percent3 }}, {{ $percent4 }},
                 {{ $percent5 }}
             ],
+
             chart: {
                 width: 450,
                 type: 'pie',
-            },
-            labels: ['Wirausaha', 'Pendidikan Profesi', 'Masa Tunggu', 'Kuliah', 'Bekerja'],
-            responsive: [{
+                events: {
+                    dataPointSelection: function(event, chartContext, config) {
+                        var selectedCategory = chartContext.w.config.labels[config.dataPointIndex];
+                        console.log("Selected Category:", selectedCategory);
+                        window.location.href = "{{ route('alumni.dashboard') }}?keterserapan=" + selectedCategory;
+                        }
+                    }
+                },
+                labels: ['Wirausaha', 'Pendidikan Profesi', 'Masa Tunggu', 'Kuliah', 'Bekerja'],
+                responsive: [{
                 breakpoint: 480,
                 options: {
                     chart: {
@@ -226,5 +137,25 @@
 
         var chart = new ApexCharts(document.querySelector("#piechart"), options);
         chart.render();
+
+        $(document).ready(function() {
+            $(".category").click(function() {
+                var keterserapan = $(this).text().trim();
+                var percentages = initialPercentages.slice(); // Copy the initial values
+                // Modify the percentages based on the clicked category
+                switch (keterserapan) {
+                    case 'Wirausaha':
+                        // Modify percentages array here
+                        break;
+                    case 'Pendidikan Profesi':
+                        // Modify percentages array here
+                        break;
+                    // Add cases for other categories
+                console.log("Keterserapan:", keterserapan); // Tambahkan ini untuk debugging
+                window.location.href = "{{ route('alumni.dashboard') }}?keterserapan=" + keterserapan;
+            }
+        });
+
+    });
     </script>
 @endsection()

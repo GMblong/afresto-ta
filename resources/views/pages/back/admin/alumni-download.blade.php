@@ -20,9 +20,9 @@
                             <tr>
                                 <th>No</th>
                                 <th>Nama</th>
-                                <th>NIS</th>
                                 <th>Jurusan</th>
                                 <th>Tahun Lulus</th>
+                                <th>NIS</th>
                                 <th>Password</th>
                             </tr>
                         </thead>
@@ -34,10 +34,10 @@
                                 <tr>
                                     <td>{{ $number }}</td>
                                     <td>{{ $row->nama }}</td>
-                                    <td>{{ $row->nis }}</td>
                                     <td>{{ $row->jurusan }}</td>
                                     <td>{{ $row->thn_lulus }}</td>
-                                    <td>{{ $row->password}}</td>
+                                    <td>{{ $row->nis }}</td>
+                                    <td>{{ $row->nis}}</td>
                                     
                                 </tr>
                                 @php

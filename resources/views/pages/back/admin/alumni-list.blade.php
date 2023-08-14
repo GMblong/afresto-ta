@@ -14,7 +14,7 @@
                     <div class="card-title border-bottom border-2 border-primary d-flex flex-align-row justify-content-between">
                         <h4 class="px-3 py-3 px-lg-4 py-lg-4 mb-0 text-start">Daftar Alumni</h4>
                         <a href="{{route('admin.alumni_download')}}" class="btn btn-dark btn-sm mx-4 my-4">
-                        <span>Download Akun Alumni</span>
+                        <span>Akun Alumni</span>
                     </a>
                     </div>
                     <div class="card-body table-responsive">
@@ -27,7 +27,7 @@
                                     <th>Jurusan</th>
                                     <th>Tahun Lulus</th>
                                     <th>Keterserapan</th>
-                                    <th>Action</th>
+                                    <th class="no-export">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -42,7 +42,7 @@
                                         <td>{{ $row->jurusan }}</td>
                                         <td>{{ $row->thn_lulus }}</td>
                                         <td>{{ $row->keterserapan }}</td>
-                                        <td>
+                                        <td class="no-export">
                                             <a href="#" class="btn btn-info btn-sm" data-bs-toggle="modal"
                                                 data-bs-target="#{{ $row->id }}">Detail</a>
                                             <a href="{{ route('admin.edit_alumni', $row->id) }}"

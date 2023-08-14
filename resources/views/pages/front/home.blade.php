@@ -29,12 +29,12 @@
                             <div class="login-button text-center my-4">
                                 <button type="button" class="admin-login btn btn-primary btn-md" data-bs-toggle="modal"
                                     data-bs-target="#adminModal">
-                                    <span>Admin</span>
+                                    <span>Login</span>
                                 </button>
-                                <button type="button" class="alumni-login btn btn-info btn-md" data-bs-toggle="modal"
+                                <!-- <button type="button" class="alumni-login btn btn-info btn-md" data-bs-toggle="modal"
                                     data-bs-target="#alumniModal">
                                     <span>Alumni</span>
-                                </button>
+                                </button> -->
                                 <a href="{{ route('guest.dashboard') }}" class="guest-login btn btn-warning btn-md">
                                     <span>Guest</span></a>
                             </div>
@@ -49,14 +49,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="adminModalLabel">Masuk Sebagai Admin</h5>
+                    <h5 class="modal-title" id="adminModalLabel">Masuk</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                            <label for="email" class="form-label">Email / NIS</label>
                             <input type="text" class="form-control" id="email" name="email"
                                 autocomplete="username">
                             <x-input-error :messages="$errors->get('email')" class="mt-2" />
